@@ -1,0 +1,100 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ─── Design Tokens ─── */
+:root {
+  --color-bg: #0B0E14;
+  --color-surface: #111827;
+  --color-emerald: #10b981;
+  --color-emerald-deep: #059669;
+  --color-text-primary: #ffffff;
+  --color-text-secondary: #94a3b8;
+  --color-danger: #ef4444;
+  --color-warning: #f59e0b;
+  --color-gold: #fbbf24;
+  --radius-card: 24px;
+  --radius-pill: 9999px;
+}
+
+/* ─── Base Styles ─── */
+body {
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  background-color: var(--color-bg);
+  color: var(--color-text-primary);
+  margin: 0;
+  overflow: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ─── Utility Classes ─── */
+.brand-gradient {
+  background: linear-gradient(135deg, var(--color-emerald) 0%, var(--color-emerald-deep) 100%);
+}
+
+.text-balance {
+  text-wrap: balance;
+}
+
+.gpu-layer {
+  will-change: transform;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+}
+
+/* Chart image sharpness for low-DPI exports */
+.chart-crisp {
+  image-rendering: -webkit-optimize-contrast;
+}
+
+/* ─── Noise Texture (replaces external transparenttextures.com) ─── */
+.noise-overlay {
+  position: relative;
+}
+.noise-overlay::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 50;
+  opacity: 0.025;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  background-size: 256px 256px;
+}
+
+/* ─── Loading Skeleton Shimmer ─── */
+.skeleton-shimmer {
+  background: linear-gradient(90deg,
+    rgba(255,255,255,0.03) 0%,
+    rgba(255,255,255,0.08) 50%,
+    rgba(255,255,255,0.03) 100%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 2s infinite linear;
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+/* ─── Scrollbar Styling ─── */
+::-webkit-scrollbar {
+  width: 4px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(16, 185, 129, 0.3);
+  border-radius: 9999px;
+}
+
+/* ─── Selection Color ─── */
+::selection {
+  background: rgba(16, 185, 129, 0.3);
+  color: #fff;
+}
