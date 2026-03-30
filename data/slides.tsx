@@ -1,14 +1,12 @@
 import React from 'react';
-import { Clock, Target, Crosshair, ArrowRight, TrendingUp, Layers } from 'lucide-react';
+import { Clock, Target, Crosshair, TrendingUp, Layers, Eye, Zap, ArrowRight } from 'lucide-react';
 import {
   Keyword,
   ChecklistStep,
-  ProConGrid,
-  CollapsibleSection,
-  CheatSheetMatrix,
-  NestedDiagram,
   FlowSteps,
   RevealBox,
+  NestedDiagram,
+  CollapsibleSection,
 } from '../components/InteractiveComponents';
 
 /* ─── Slide type definitions ─── */
@@ -40,37 +38,323 @@ export const SLIDES: SlideData[] = [
     id: 0,
     type: 'TITLE',
     variant: 'dark',
-    title: 'The $3M\nEntry Model',
-    subtitle: 'FVGs, IFVGs & The Golden Entry',
-    footer: 'Lanto Trades • Part 2',
+    title: 'The HTF\nFramework',
+    subtitle: '4 Timeframes. 2 Things. Every Trade.',
+    footer: 'Lanto Trades • Part 3',
   },
 
   /* ═══════════════════════════════════════
-     SLIDE 1 — SPLIT: Know Where → Know When
+     SLIDE 1 — STATEMENT: The Misconception
      ═══════════════════════════════════════ */
   {
     id: 1,
+    type: 'STATEMENT',
+    variant: 'dark',
+    title: 'Scalping ≠',
+    subtitle: 'Low Timeframe Trading',
+    footer: 'The 1-minute chart is for execution. The decision comes from above.',
+  },
+
+  /* ═══════════════════════════════════════
+     SLIDE 2 — SPLIT: The Complete Picture
+     ═══════════════════════════════════════ */
+  {
+    id: 2,
     type: 'SPLIT',
     variant: 'emerald',
-    title: 'Two Steps to Every Trade',
+    title: 'The Complete Picture',
     splitLeft: (
+      <div className="space-y-5">
+        <div className="flex items-center gap-3">
+          <div className="p-2 bg-white/15 rounded-xl">
+            <Layers className="w-5 h-5 text-white" />
+          </div>
+          <h3 className="text-2xl font-black text-white uppercase tracking-wider">
+            The Puzzle
+          </h3>
+        </div>
+        <p className="text-xl text-white/90 leading-relaxed">
+          You wouldn't build a 1,000-piece puzzle without looking at the box first.
+        </p>
+        <FlowSteps
+          steps={[
+            { label: 'Daily', desc: 'The picture on the box' },
+            { label: '4-Hour', desc: 'The edge pieces' },
+            { label: '1-Hour', desc: 'The corner pieces' },
+            { label: '30-Min', desc: 'Filling in sections' },
+          ]}
+        />
+      </div>
+    ),
+    splitRight: (
       <div className="space-y-5">
         <div className="flex items-center gap-3">
           <div className="p-2 bg-white/15 rounded-xl">
             <Target className="w-5 h-5 text-white" />
           </div>
           <h3 className="text-2xl font-black text-white uppercase tracking-wider">
-            Step 1: Know Where
+            What We Mark
           </h3>
         </div>
         <p className="text-xl text-white/90 leading-relaxed">
-          Higher timeframe analysis gives you the bias. The ORM gives you the confirmation.
+          On <em>every</em> timeframe — two things. That's it.
         </p>
         <FlowSteps
           steps={[
-            { label: 'HTF Magnets', desc: 'Swing points, FVGs, IFVGs' },
-            { label: 'Overnight Range', desc: 'Asia & London sessions build the setup' },
-            { label: 'ORM Confirmation', desc: 'NY Open drives into liquidity' },
+            { label: 'Swing Points', desc: 'Key levels — where liquidity lives' },
+            { label: 'Imbalances', desc: 'Best zones — where price wants to return' },
+          ]}
+        />
+        <RevealBox title="The Key" variant="gold">
+          <p className="text-white text-lg leading-relaxed">
+            When they <strong className="text-amber-400">stack</strong> — when the Daily tells you the same thing the 30-minute does — that's your A+ setup before you ever open the 1-minute chart.
+          </p>
+        </RevealBox>
+      </div>
+    ),
+  },
+
+  /* ═══════════════════════════════════════
+     SLIDE 3 — CONTENT_GRID: Swing Points
+     ═══════════════════════════════════════ */
+  {
+    id: 3,
+    type: 'CONTENT_GRID',
+    variant: 'dark',
+    title: 'Swing Points & Key Levels',
+    chartUrl: '/images/htf-1.png',
+    chartLabel: 'HTF Swing Points → LTF Draw on Liquidity',
+    content: (
+      <div className="space-y-8">
+        <div className="space-y-4">
+          <div className="flex items-center gap-3">
+            <div className="p-2 bg-emerald-500 rounded-lg text-white">
+              <Target className="w-5 h-5" />
+            </div>
+            <h3 className="text-3xl font-black text-white">The Magnets</h3>
+          </div>
+          <p className="text-xl text-slate-300 leading-relaxed">
+            On every timeframe, identify where the market reversed. These are the <Keyword>liquidity pools</Keyword> — the magnets price is drawn to.
+          </p>
+        </div>
+        <div className="space-y-3">
+          <ChecklistStep
+            step={1}
+            text="External Highs & Lows"
+            detail="The most recent significant high and low. Price is ultimately going to take one of these — that's the game."
+          />
+          <ChecklistStep
+            step={2}
+            text="Internal Swing Points"
+            detail="Pullback highs and lows inside the range. Traders have stops here — the market knows it, and it's coming for them."
+          />
+          <ChecklistStep
+            step={3}
+            text="Multi-TF Alignment"
+            detail="A Daily internal low that's also a 30m external low — four timeframes, same level. Highest conviction zone."
+          />
+        </div>
+        <div className="p-4 rounded-xl bg-white/[0.03] border border-white/[0.06]">
+          <p className="text-lg text-slate-300 italic">
+            "The Daily is the <Keyword>roadmap</Keyword>. The 4H refines. The 1H targets. The 30m finalizes."
+          </p>
+        </div>
+      </div>
+    ),
+  },
+
+  /* ═══════════════════════════════════════
+     SLIDE 4 — DIAGRAM: The Drill-Down
+     ═══════════════════════════════════════ */
+  {
+    id: 4,
+    type: 'DIAGRAM',
+    variant: 'emerald',
+    title: 'The Drill-Down',
+    content: (
+      <div className="grid lg:grid-cols-2 gap-12 items-center">
+        <div className="space-y-6">
+          <NestedDiagram
+            levels={[
+              { label: 'DAILY', desc: 'The Roadmap — narrative & big picture' },
+              { label: '4-HOUR', desc: 'Refining — confirms or challenges Daily' },
+              { label: '1-HOUR', desc: 'Precision — surgical target zones' },
+              { label: '30-MIN', desc: 'Sniper Scope — final HTF lens' },
+            ]}
+          />
+        </div>
+        <div className="space-y-6">
+          <RevealBox title="How Each Layer Works" variant="emerald">
+            <div className="space-y-4">
+              <p className="text-white text-lg leading-relaxed">
+                Start at the <strong className="text-emerald-400">Daily</strong> and work down. Each timeframe adds detail. Each confirms or challenges what the one above told you.
+              </p>
+              <p className="text-white text-lg leading-relaxed">
+                A level on <strong className="text-emerald-400">multiple timeframes</strong> means every trader sees it — and has liquidity sitting there.
+              </p>
+              <p className="text-amber-400 font-bold text-lg">
+                When price takes it — the move that follows is violent.
+              </p>
+            </div>
+          </RevealBox>
+        </div>
+      </div>
+    ),
+  },
+
+  /* ═══════════════════════════════════════
+     SLIDE 5 — DIAGRAM: Multi-TF Convergence
+     ═══════════════════════════════════════ */
+  {
+    id: 5,
+    type: 'DIAGRAM',
+    variant: 'dark',
+    title: 'Multi-Timeframe Convergence',
+    content: (
+      <div className="max-w-4xl mx-auto space-y-8">
+        <p className="text-xl text-slate-300 text-center leading-relaxed">
+          When four timeframes point at the <Keyword>same price level</Keyword> — that is the highest conviction zone possible.
+        </p>
+        <div className="space-y-3">
+          <div className="p-4 rounded-xl border bg-emerald-500/[0.06] border-emerald-500/20 backdrop-blur-sm">
+            <div className="flex items-center justify-between">
+              <span className="text-xs font-black uppercase tracking-[0.15em] text-emerald-400">DAILY</span>
+              <span className="text-sm text-white/80 font-medium">Internal Low — Swing Point</span>
+            </div>
+          </div>
+          <div className="p-4 rounded-xl border bg-emerald-500/[0.09] border-emerald-500/25 backdrop-blur-sm ml-[6%]">
+            <div className="flex items-center justify-between">
+              <span className="text-xs font-black uppercase tracking-[0.15em] text-emerald-400">4-HOUR</span>
+              <span className="text-sm text-white/80 font-medium">External Swing Low</span>
+            </div>
+          </div>
+          <div className="p-4 rounded-xl border bg-emerald-500/[0.12] border-emerald-500/30 backdrop-blur-sm ml-[12%]">
+            <div className="flex items-center justify-between">
+              <span className="text-xs font-black uppercase tracking-[0.15em] text-emerald-400">1-HOUR</span>
+              <span className="text-sm text-white/80 font-medium">Swing Point Reaction Zone</span>
+            </div>
+          </div>
+          <div className="p-4 rounded-xl border bg-emerald-500/[0.16] border-emerald-500/40 backdrop-blur-sm ml-[18%]">
+            <div className="flex items-center justify-between">
+              <span className="text-xs font-black uppercase tracking-[0.15em] text-emerald-400">30-MIN</span>
+              <span className="text-sm text-white/80 font-medium">External Low + Liquidity Pool</span>
+            </div>
+          </div>
+        </div>
+        <div className="text-center pt-2">
+          <div className="inline-flex items-center gap-3 px-6 py-3 rounded-full bg-amber-500/10 border border-amber-500/30">
+            <span className="text-amber-400 text-lg">★</span>
+            <span className="text-base font-black text-amber-300 uppercase tracking-wider">High-Probability Reaction Zone</span>
+            <span className="text-amber-400 text-lg">★</span>
+          </div>
+        </div>
+        <RevealBox title="Why Convergence Matters" variant="gold">
+          <p className="text-white text-lg leading-relaxed">
+            You're not guessing. You're not hoping. You have <strong className="text-amber-400">four layers of evidence</strong> telling you where the market is going to react. This is where your A+ setups live.
+          </p>
+        </RevealBox>
+      </div>
+    ),
+  },
+
+  /* ═══════════════════════════════════════
+     SLIDE 6 — CONTENT_GRID: Best Imbalances
+     ═══════════════════════════════════════ */
+  {
+    id: 6,
+    type: 'CONTENT_GRID',
+    variant: 'dark',
+    title: 'The Best Imbalances',
+    chartUrls: [
+      { url: '/images/htf-2.png', label: '1D FVG — Displacement After Liquidity Sweep' },
+      { url: '/images/htf-3.png', label: '1H BPR — FVG + IFVG Stacked Inside Daily Gap' },
+    ],
+    chartLabel: 'Quality Imbalances Across Timeframes',
+    content: (
+      <div className="space-y-6">
+        <div className="space-y-4">
+          <div className="flex items-center gap-3">
+            <div className="p-2 bg-emerald-500 rounded-lg text-white">
+              <Zap className="w-5 h-5" />
+            </div>
+            <h3 className="text-3xl font-black text-white">Quality Filter</h3>
+          </div>
+          <p className="text-lg text-slate-300 leading-relaxed">
+            Not all gaps are equal. The best <Keyword>imbalances</Keyword> share three qualities.
+          </p>
+        </div>
+        <div className="space-y-3">
+          <ChecklistStep
+            step={1}
+            text="Created with Displacement"
+            detail="Big, aggressive candle bodies. The market was making a statement — not uncertain."
+          />
+          <ChecklistStep
+            step={2}
+            text="Took Liquidity While Forming"
+            detail="The move that created the gap ALSO swept a swing point. That's institutional strength."
+          />
+          <ChecklistStep
+            step={3}
+            text="Dominant Body-to-Wick Ratio"
+            detail="Bodies mean conviction. Wicks mean uncertainty. You want conviction."
+          />
+        </div>
+        <CollapsibleSection label="Advanced Stacking">
+          <div className="p-4 space-y-3">
+            <div className="flex items-center gap-3 p-3 rounded-xl bg-emerald-500/10 border border-emerald-500/20">
+              <span className="text-xs font-black text-emerald-400 uppercase tracking-wider shrink-0">Ex 1</span>
+              <p className="text-sm text-white/80">1D has <Keyword>IFVG</Keyword> → 30m has <Keyword>BPR</Keyword> inside it = ★★★ Zone</p>
+            </div>
+            <div className="flex items-center gap-3 p-3 rounded-xl bg-emerald-500/10 border border-emerald-500/20">
+              <span className="text-xs font-black text-emerald-400 uppercase tracking-wider shrink-0">Ex 2</span>
+              <p className="text-sm text-white/80">4H has <Keyword>FVG</Keyword> → 1H has <Keyword>FVG</Keyword> stacked = ★★★ Zone</p>
+            </div>
+          </div>
+        </CollapsibleSection>
+      </div>
+    ),
+  },
+
+  /* ═══════════════════════════════════════
+     SLIDE 7 — STATEMENT: Price Is Fractal
+     ═══════════════════════════════════════ */
+  {
+    id: 7,
+    type: 'STATEMENT',
+    variant: 'dark',
+    title: 'Price Is',
+    subtitle: 'Fractal.',
+    footer: 'What the market does on the Daily, it does on the 1-minute. The structure is identical.',
+  },
+
+  /* ═══════════════════════════════════════
+     SLIDE 8 — SPLIT: The Fractal Truth
+     ═══════════════════════════════════════ */
+  {
+    id: 8,
+    type: 'SPLIT',
+    variant: 'emerald',
+    title: 'The Fractal Truth',
+    splitLeft: (
+      <div className="space-y-5">
+        <div className="flex items-center gap-3">
+          <div className="p-2 bg-white/15 rounded-xl">
+            <Eye className="w-5 h-5 text-white" />
+          </div>
+          <h3 className="text-2xl font-black text-white uppercase tracking-wider">
+            Finding Bias (HTF)
+          </h3>
+        </div>
+        <p className="text-lg text-white/90 leading-relaxed">
+          Daily / 4H / 1H / 30m — the macro picture.
+        </p>
+        <FlowSteps
+          steps={[
+            { label: 'Swing Points', desc: 'Key levels & targets' },
+            { label: 'FVGs / IFVGs', desc: 'Reaction zones' },
+            { label: 'Stacked Imbalances', desc: 'Highest conviction bias' },
+            { label: 'Multi-TF Convergence', desc: 'A+ level confirmed' },
           ]}
         />
       </div>
@@ -82,17 +366,18 @@ export const SLIDES: SlideData[] = [
             <Crosshair className="w-5 h-5 text-white" />
           </div>
           <h3 className="text-2xl font-black text-white uppercase tracking-wider">
-            Step 2: Pull the Trigger
+            Finding Entry (LTF)
           </h3>
         </div>
-        <p className="text-xl text-white/90 leading-relaxed">
-          <em>How</em> you get in determines your risk, your timing, and your edge.
+        <p className="text-lg text-white/90 leading-relaxed">
+          5m / 1m — the <em>exact same concepts</em> for execution.
         </p>
         <FlowSteps
           steps={[
-            { label: 'FVG Entry', desc: 'Patient — wait for the re-test' },
-            { label: 'IFVG Entry', desc: 'Aggressive — ride the inversion' },
-            { label: 'Golden Entry', desc: 'Both stacked — highest probability' },
+            { label: 'Swing Points', desc: 'Entry zones & stop placement' },
+            { label: 'FVGs / IFVGs', desc: 'Entry triggers' },
+            { label: 'Stacked Imbalances', desc: 'Highest conviction entry' },
+            { label: '5m + 1m Convergence', desc: 'A+ entry = Golden Entry' },
           ]}
         />
       </div>
@@ -100,303 +385,37 @@ export const SLIDES: SlideData[] = [
   },
 
   /* ═══════════════════════════════════════
-     SLIDE 2 — HTF RECAP
-     ═══════════════════════════════════════ */
-  {
-    id: 2,
-    type: 'CONTENT_GRID',
-    variant: 'dark',
-    title: 'Higher Timeframe Recap',
-    chartUrls: [
-      { url: '/images/Artboard 1.png', label: 'Before — Raw Chart' },
-      { url: '/images/Artboard 2.png', label: 'After — Marked Up' },
-    ],
-    chartLabel: 'Before & After Chart Markup',
-    content: (
-      <div className="space-y-8">
-        <div className="space-y-4">
-          <div className="flex items-center gap-3">
-            <div className="p-2 bg-emerald-500 rounded-lg text-white">
-              <Clock className="w-5 h-5" />
-            </div>
-            <h3 className="text-3xl font-black text-white">The Roadmap</h3>
-          </div>
-          <p className="text-xl text-slate-300 leading-relaxed">
-            On the 4H/Daily, we're finding two things — the targets price <em>wants</em> to reach.
-          </p>
-        </div>
-        <div className="space-y-3">
-          <ChecklistStep
-            step={1}
-            text="Swing Points"
-            detail="A large wick before a reversal. The market aggressively moves, creates a massive wick, then reverses. That wick is liquidity getting swept — mark it."
-          />
-          <ChecklistStep
-            step={2}
-            text="Fair Value Gaps"
-            detail="FVGs and IFVGs created with displacement — aggressive, impulsive moves — AND after liquidity was taken."
-          />
-        </div>
-        <div className="p-4 rounded-xl bg-white/[0.03] border border-white/[0.06]">
-          <p className="text-lg text-slate-300 italic">
-            "Before — noise. After — a <Keyword>roadmap</Keyword>."
-          </p>
-        </div>
-      </div>
-    ),
-  },
-
-  /* ═══════════════════════════════════════
-     SLIDE 3 — ORM RECAP
-     ═══════════════════════════════════════ */
-  {
-    id: 3,
-    type: 'CONTENT_GRID',
-    variant: 'emerald',
-    title: 'The ORM Trigger',
-    chartUrl: '/images/Artboard 3.png',
-    chartLabel: 'ORM Confirmation at NY Open',
-    content: (
-      <div className="space-y-8">
-        <p className="text-xl text-white/90 leading-relaxed">
-          Layer on the ORM framework. Wait for New York to sweep the overnight level — then watch the <Keyword>reaction</Keyword>.
-        </p>
-        <FlowSteps
-          steps={[
-            { label: 'Asia / London', desc: 'Sets the overnight range — builds the trap' },
-            { label: 'NY Open', desc: 'Drives into the Asia/London high or low' },
-            { label: 'The Sweep', desc: 'Initial move into overnight liquidity' },
-            { label: 'The Reaction', desc: 'Confirmation — the market shows its hand' },
-          ]}
-        />
-        <RevealBox title="The Key Insight" variant="gold">
-          <p className="text-white text-lg leading-relaxed">
-            You now have your bias. You know where the HTF targets are. You've seen the ORM confirmation.
-            <strong className="text-amber-400 block mt-2 text-lg">Entry model. Now.</strong>
-          </p>
-        </RevealBox>
-      </div>
-    ),
-  },
-
-  /* ═══════════════════════════════════════
-     SLIDE 4 — STATEMENT: Two Entries
-     ═══════════════════════════════════════ */
-  {
-    id: 4,
-    type: 'STATEMENT',
-    variant: 'dark',
-    title: 'Two Entries.',
-    subtitle: "That's It.",
-    footer: 'The FVG Entry & The IFVG Entry',
-  },
-
-  /* ═══════════════════════════════════════
-     SLIDE 5 — FVG ENTRY (+ Pros & Cons)
-     ═══════════════════════════════════════ */
-  {
-    id: 5,
-    type: 'CONTENT_GRID',
-    variant: 'dark',
-    title: 'The FVG Entry',
-    chartUrl: '/images/Artboard 4.png',
-    chartLabel: 'FVG Structure & Retrace',
-    content: (
-      <div className="space-y-4">
-        <div className="space-y-2">
-          <div className="flex items-center gap-3">
-            <div className="px-3 py-1 rounded-lg bg-emerald-500/15 text-emerald-400 text-xs font-black uppercase tracking-[0.15em]">
-              The Patient Entry
-            </div>
-          </div>
-          <p className="text-lg text-slate-300 leading-relaxed">
-            Price makes an impulsive move leaving an <Keyword>imbalance</Keyword>. Wait for price to retrace back into it.
-          </p>
-        </div>
-        <div className="space-y-2">
-          <ChecklistStep
-            step={1}
-            text="Identify the imbalance"
-            detail="Price moves impulsively and leaves a gap (FVG) — mark it."
-          />
-          <ChecklistStep
-            step={2}
-            text="Wait for the retrace"
-            detail="Don't chase. Let price pull back into the imbalance zone."
-          />
-          <ChecklistStep
-            step={3}
-            text="Enter the re-test"
-            detail="Price proves the level holds — that's your entry."
-          />
-        </div>
-        <CollapsibleSection label="Pros & Cons">
-          <ProConGrid
-            pros={[
-              'Forces patience — no FOMO entries',
-              'Naturally tighter, better-priced entry',
-              'Re-test = real confirmation the level holds',
-            ]}
-            cons={[
-              'In strong moves, price may never retrace',
-              'The move can leave without you',
-              'Can lead to forcing bad entries by widening the zone',
-            ]}
-            bestFor="Reversals"
-            worstFor="Continuation"
-          />
-        </CollapsibleSection>
-      </div>
-    ),
-  },
-
-  /* ═══════════════════════════════════════
-     SLIDE 6 — IFVG ENTRY (+ Pros & Cons)
-     ═══════════════════════════════════════ */
-  {
-    id: 6,
-    type: 'CONTENT_GRID',
-    variant: 'dark',
-    title: 'The IFVG Entry',
-    chartUrl: '/images/Artboard 4.png',
-    chartLabel: 'IFVG — Previous FVG Gets Inverted',
-    content: (
-      <div className="space-y-4">
-        <div className="space-y-2">
-          <div className="flex items-center gap-3">
-            <div className="px-3 py-1 rounded-lg bg-red-500/15 text-red-400 text-xs font-black uppercase tracking-[0.15em]">
-              The Aggressive Entry
-            </div>
-          </div>
-          <p className="text-lg text-slate-300 leading-relaxed">
-            An <Keyword>Inversion FVG</Keyword> is a previous FVG getting disrespected — price runs through it and flips direction.
-          </p>
-        </div>
-        <div className="space-y-2">
-          <ChecklistStep
-            step={1}
-            text="Previous bullish FVG exists"
-            detail="Price was supposed to respect this gap going up."
-          />
-          <ChecklistStep
-            step={2}
-            text="Price blows right through it"
-            detail="The old level is disrespected. That gap is now inverted."
-          />
-          <ChecklistStep
-            step={3}
-            text="The inversion = your entry zone"
-            detail="Once it inverts and turns, you're in WITH the new direction."
-          />
-        </div>
-        <CollapsibleSection label="Pros & Cons">
-          <ProConGrid
-            pros={[
-              'Speed — the market already showed its hand',
-              'High follow-through probability from entry',
-              'Perfect for trending, continuation moves',
-            ]}
-            cons={[
-              'On reversals, can absolutely fake you out',
-              'Without enough data, you enter prematurely',
-              'Your "reversal" can just be a bump in the road',
-            ]}
-            bestFor="Continuation"
-            worstFor="Reversals"
-          />
-        </CollapsibleSection>
-      </div>
-    ),
-  },
-
-  /* ═══════════════════════════════════════
-     SLIDE 7 — CHEAT SHEET
-     ═══════════════════════════════════════ */
-  {
-    id: 7,
-    type: 'CHEAT_SHEET',
-    variant: 'dark',
-    title: 'The Cheat Sheet',
-    content: <CheatSheetMatrix />,
-  },
-
-  /* ═══════════════════════════════════════
-     SLIDE 8 — GOLDEN ENTRY
-     ═══════════════════════════════════════ */
-  {
-    id: 8,
-    type: 'CONTENT_GRID',
-    variant: 'dark',
-    title: 'The Golden Entry',
-    chartUrl: '/images/Artboard 5.png',
-    chartLabel: 'FVG + IFVG Stacked — Double Confirmation',
-    content: (
-      <div className="space-y-8">
-        <div className="space-y-3">
-          <div className="flex items-center gap-3">
-            <div className="px-3 py-1 rounded-lg bg-amber-500/15 text-amber-400 text-xs font-black uppercase tracking-[0.15em]">
-              ★ The Highest Probability Entry
-            </div>
-          </div>
-          <p className="text-lg text-slate-300 leading-relaxed">
-            <Keyword>FVG</Keyword> + <Keyword>IFVG</Keyword>, in sync. Two rebalances in one move. Double confirmation.
-          </p>
-        </div>
-        <div className="space-y-3">
-          <ChecklistStep
-            step={1}
-            text="5m Chart → FVG zone, price retraces into it"
-            detail="That's your first rebalance. The market came back, respected the zone."
-          />
-          <ChecklistStep
-            step={2}
-            text="Drop to 1m → IFVG forms inside the 5m zone"
-            detail="Price inverts a previous gap on the 1-minute. That inversion is your trigger."
-          />
-          <ChecklistStep
-            step={3}
-            text="Execute"
-            detail="Two rebalances, one trade. The 5m tells you the ZONE is valid. The 1m tells you the TIMING is now."
-          />
-        </div>
-      </div>
-    ),
-  },
-
-  /* ═══════════════════════════════════════
-     SLIDE 9 — GOLDEN ENTRY DIAGRAM
+     SLIDE 9 — CONTENT_GRID: Complete Sequence
      ═══════════════════════════════════════ */
   {
     id: 9,
-    type: 'DIAGRAM',
-    variant: 'emerald',
-    title: 'Double Confirmation',
+    type: 'CONTENT_GRID',
+    variant: 'dark',
+    title: 'The Complete Sequence',
+    chartUrl: '/images/htf-4.png',
+    chartLabel: 'ORM Confirmation → Entry Execution',
     content: (
-      <div className="grid lg:grid-cols-2 gap-12 items-center">
-        <div className="space-y-6">
-          <NestedDiagram
-            levels={[
-              { label: '5m FVG', desc: 'First Rebalance — Zone is Valid' },
-              { label: '1m IFVG', desc: 'FVG Disrespected — Timing is Now' },
-              { label: 'EXECUTE', desc: 'Double-confirmed entry' },
-            ]}
-          />
-        </div>
-        <div className="space-y-6">
-          <RevealBox title="Why This Is The Best Entry" variant="gold">
-            <div className="space-y-4">
-              <p className="text-white text-lg leading-relaxed">
-                Your 5m FVG gives you the <strong className="text-emerald-400">patience play</strong> — you waited for the retrace. Your risk is small.
-              </p>
-              <p className="text-white text-lg leading-relaxed">
-                Your 1m IFVG gives you the <strong className="text-emerald-400">precision</strong> — you're not blindly entering the zone. The market showed you it's ready.
-              </p>
-              <p className="text-amber-400 font-bold text-lg">
-                This is the entry that funded my accounts.
-              </p>
-            </div>
-          </RevealBox>
-        </div>
+      <div className="space-y-8">
+        <p className="text-xl text-slate-300 leading-relaxed">
+          HTF gives you the <Keyword>story</Keyword>. ORM gives you the <Keyword>direction</Keyword>. LTF gives you the <Keyword>entry</Keyword>.
+        </p>
+        <FlowSteps
+          steps={[
+            { label: 'Step 1: HTF Analysis', desc: 'Daily → 4H → 1H → 30m. Mark swing points. Mark imbalances. Find convergence zones.' },
+            { label: 'Step 2: ORM Confirmation', desc: 'Overnight range builds. NY sweeps the overnight H/L. Reaction confirms or denies bias.' },
+            { label: 'Step 3: Entry', desc: '5m FVG rebalance → 1m IFVG trigger. Same fractal pattern. Execute.' },
+          ]}
+        />
+        <RevealBox title="The Full Picture" variant="gold">
+          <div className="space-y-3">
+            <p className="text-white text-lg leading-relaxed">
+              The 5m FVG and 1m IFVG stacking inside your HTF zone — that's the <strong className="text-amber-400">Golden Entry</strong> from Video 2.
+            </p>
+            <p className="text-white text-lg leading-relaxed">
+              Same game. Every timeframe. <strong className="text-emerald-400">Fractal.</strong>
+            </p>
+          </div>
+        </RevealBox>
       </div>
     ),
   },
@@ -408,11 +427,13 @@ export const SLIDES: SlideData[] = [
     id: 10,
     type: 'SUMMARY',
     variant: 'dark',
-    title: 'The Complete Entry Model',
+    title: 'The Complete HTF Framework',
     summaryItems: [
-      { label: 'FVG Entry', desc: 'For reversals — patient, re-test confirmation, tighter risk' },
-      { label: 'IFVG Entry', desc: 'For continuation — aggressive, momentum-confirmed, fast execution' },
-      { label: 'The Golden Entry', desc: 'FVG + IFVG in sync — double confirmation, highest probability' },
+      { label: '4 Timeframes', desc: 'Daily → 4H → 1H → 30m. Start from the top, work your way down. Every layer adds detail.' },
+      { label: 'Swing Points', desc: 'Internal & external levels — where liquidity lives and where price is drawn to.' },
+      { label: 'Imbalances', desc: 'FVGs, IFVGs, BPRs — quality gaps with displacement, liquidity sweeps, and conviction.' },
+      { label: 'Convergence', desc: 'When multiple timeframes agree on the same zone — that\'s your highest probability setup.' },
+      { label: 'Fractal Truth', desc: 'HTF concepts = LTF concepts. Learn one, you\'ve learned both. Same game, every scale.' },
     ],
   },
 ];
