@@ -22,6 +22,7 @@ export interface SlideData {
   subtitle?: string;
   footer?: string;
   chartUrl?: string;
+  chartUrls?: { url: string; label: string }[];
   chartLabel?: string;
   content?: React.ReactNode;
   splitLeft?: React.ReactNode;
@@ -106,7 +107,10 @@ export const SLIDES: SlideData[] = [
     type: 'CONTENT_GRID',
     variant: 'dark',
     title: 'Higher Timeframe Recap',
-    chartUrl: '/images/htf-before-after.png',
+    chartUrls: [
+      { url: '/images/Artboard 1.png', label: 'Before — Raw Chart' },
+      { url: '/images/Artboard 2.png', label: 'After — Marked Up' },
+    ],
     chartLabel: 'Before & After Chart Markup',
     content: (
       <div className="space-y-8">
@@ -150,7 +154,7 @@ export const SLIDES: SlideData[] = [
     type: 'CONTENT_GRID',
     variant: 'emerald',
     title: 'The ORM Trigger',
-    chartUrl: '/images/orm-confirmation.png',
+    chartUrl: '/images/Artboard 3.png',
     chartLabel: 'ORM Confirmation at NY Open',
     content: (
       <div className="space-y-8">
@@ -195,7 +199,7 @@ export const SLIDES: SlideData[] = [
     type: 'CONTENT_GRID',
     variant: 'dark',
     title: 'The FVG Entry',
-    chartUrl: '/images/fvg-retrace.png',
+    chartUrl: '/images/Artboard 4.png',
     chartLabel: 'FVG Structure & Retrace',
     content: (
       <div className="space-y-4">
@@ -254,7 +258,7 @@ export const SLIDES: SlideData[] = [
     type: 'CONTENT_GRID',
     variant: 'dark',
     title: 'The IFVG Entry',
-    chartUrl: '/images/ifvg-inversion.png',
+    chartUrl: '/images/Artboard 4.png',
     chartLabel: 'IFVG — Previous FVG Gets Inverted',
     content: (
       <div className="space-y-4">
@@ -324,7 +328,7 @@ export const SLIDES: SlideData[] = [
     type: 'CONTENT_GRID',
     variant: 'dark',
     title: 'The Golden Entry',
-    chartUrl: '/images/golden-entry.png',
+    chartUrl: '/images/Artboard 5.png',
     chartLabel: 'FVG + IFVG Stacked — Double Confirmation',
     content: (
       <div className="space-y-8">

@@ -64,8 +64,13 @@ const App: React.FC = () => {
   const [[page, direction], setPage] = useState([0, 0]);
 
   // Preload all chart images on mount
-  const chartUrls = SLIDES.filter((s) => s.chartUrl).map((s) => s.chartUrl!);
-  usePreloadImages(chartUrls);
+  const allChartUrls = SLIDES.flatMap((s) => {
+    const urls: string[] = [];
+    if (s.chartUrl) urls.push(s.chartUrl);
+    if (s.chartUrls) urls.push(...s.chartUrls.map((c) => c.url));
+    return urls;
+  });
+  usePreloadImages(allChartUrls);
 
   const paginate = useCallback(
     (newDirection: number) => {
@@ -226,10 +231,26 @@ const App: React.FC = () => {
               initial="hidden"
               animate="visible"
             >
-              <ChartDisplay
-                label={data.chartLabel || ''}
-                imageUrl={data.chartUrl}
-              />
+              {data.chartUrls ? (
+                <div className="flex flex-col gap-6">
+                  {data.chartUrls.map((chart, idx) => (
+                    <div key={idx} className="space-y-2">
+                      <p className="text-xs font-black uppercase tracking-[0.15em] text-center text-slate-400">
+                        {chart.label}
+                      </p>
+                      <ChartDisplay
+                        label={chart.label}
+                        imageUrl={chart.url}
+                      />
+                    </div>
+                  ))}
+                </div>
+              ) : (
+                <ChartDisplay
+                  label={data.chartLabel || ''}
+                  imageUrl={data.chartUrl}
+                />
+              )}
             </motion.div>
           </div>
         );
