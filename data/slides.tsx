@@ -7,6 +7,7 @@ import {
   RevealBox,
   NestedDiagram,
   CollapsibleSection,
+  InteractivePuzzle,
 } from '../components/InteractiveComponents';
 
 /* ─── Slide type definitions ─── */
@@ -60,56 +61,12 @@ export const SLIDES: SlideData[] = [
      ═══════════════════════════════════════ */
   {
     id: 2,
-    type: 'SPLIT',
+    type: 'DIAGRAM',
     variant: 'emerald',
     title: 'The Complete Picture',
-    splitLeft: (
-      <div className="space-y-5">
-        <div className="flex items-center gap-3">
-          <div className="p-2 bg-white/15 rounded-xl">
-            <Layers className="w-5 h-5 text-white" />
-          </div>
-          <h3 className="text-2xl font-black text-white uppercase tracking-wider">
-            The Puzzle
-          </h3>
-        </div>
-        <p className="text-xl text-white/90 leading-relaxed">
-          You wouldn't build a 1,000-piece puzzle without looking at the box first.
-        </p>
-        <FlowSteps
-          steps={[
-            { label: 'Daily', desc: 'The picture on the box' },
-            { label: '4-Hour', desc: 'The edge pieces' },
-            { label: '1-Hour', desc: 'The corner pieces' },
-            { label: '30-Min', desc: 'Filling in sections' },
-          ]}
-        />
-      </div>
-    ),
-    splitRight: (
-      <div className="space-y-5">
-        <div className="flex items-center gap-3">
-          <div className="p-2 bg-white/15 rounded-xl">
-            <Target className="w-5 h-5 text-white" />
-          </div>
-          <h3 className="text-2xl font-black text-white uppercase tracking-wider">
-            What We Mark
-          </h3>
-        </div>
-        <p className="text-xl text-white/90 leading-relaxed">
-          On <em>every</em> timeframe — two things. That's it.
-        </p>
-        <FlowSteps
-          steps={[
-            { label: 'Swing Points', desc: 'Key levels — where liquidity lives' },
-            { label: 'Imbalances', desc: 'Best zones — where price wants to return' },
-          ]}
-        />
-        <RevealBox title="The Key" variant="gold">
-          <p className="text-white text-lg leading-relaxed">
-            When they <strong className="text-amber-400">stack</strong> — when the Daily tells you the same thing the 30-minute does — that's your A+ setup before you ever open the 1-minute chart.
-          </p>
-        </RevealBox>
+    content: (
+      <div className="w-full h-full flex items-center justify-center p-8">
+        <InteractivePuzzle />
       </div>
     ),
   },
@@ -150,13 +107,13 @@ export const SLIDES: SlideData[] = [
           />
           <ChecklistStep
             step={3}
-            text="Multi-TF Alignment"
-            detail="A Daily internal low that's also a 30m external low — four timeframes, same level. Highest conviction zone."
+            text="Fractal Alignment"
+            detail="An HTF internal low that forms your Bias, which matches your LTF structural framework, creates a high conviction entry."
           />
         </div>
         <div className="p-4 rounded-xl bg-white/[0.03] border border-white/[0.06]">
           <p className="text-lg text-slate-300 italic">
-            "The Daily is the <Keyword>roadmap</Keyword>. The 4H refines. The 1H targets. The 30m finalizes."
+            "The Higher Timeframe sets the <Keyword>roadmap</Keyword>. The Lower Timeframe maps the <Keyword>entry</Keyword>."
           </p>
         </div>
       </div>
@@ -176,24 +133,24 @@ export const SLIDES: SlideData[] = [
         <div className="space-y-6">
           <NestedDiagram
             levels={[
-              { label: 'DAILY', desc: 'The Roadmap — narrative & big picture' },
-              { label: '4-HOUR', desc: 'Refining — confirms or challenges Daily' },
-              { label: '1-HOUR', desc: 'Precision — surgical target zones' },
-              { label: '30-MIN', desc: 'Sniper Scope — final HTF lens' },
+              { label: '1. MACRO BIAS', desc: 'The Roadmap — narrative & destination' },
+              { label: '2. STRUCTURE', desc: 'Mark internal / external swing points' },
+              { label: '3. IMBALANCES', desc: 'Identify drawing magnets (FVGs / IFVGs)' },
+              { label: '4. LTF ENTRY', desc: 'Find the identical setup inside the zone' },
             ]}
           />
         </div>
         <div className="space-y-6">
-          <RevealBox title="How Each Layer Works" variant="emerald">
+          <RevealBox title="The Charting Truth" variant="emerald">
             <div className="space-y-4">
               <p className="text-white text-lg leading-relaxed">
-                Start at the <strong className="text-emerald-400">Daily</strong> and work down. Each timeframe adds detail. Each confirms or challenges what the one above told you.
+                Start at the <strong className="text-emerald-400">Macro</strong> and work your way down. You do not need a different strategy for each timeframe.
               </p>
               <p className="text-white text-lg leading-relaxed">
-                A level on <strong className="text-emerald-400">multiple timeframes</strong> means every trader sees it — and has liquidity sitting there.
+                An FVG is an FVG. A sweep is a sweep. Whether it's the weekly chart or the 1-minute chart, <strong className="text-emerald-400">we chart every timeframe the exact same</strong>.
               </p>
               <p className="text-amber-400 font-bold text-lg">
-                When price takes it — the move that follows is violent.
+                The only difference is the outcome duration.
               </p>
             </div>
           </RevealBox>
@@ -203,65 +160,10 @@ export const SLIDES: SlideData[] = [
   },
 
   /* ═══════════════════════════════════════
-     SLIDE 5 — DIAGRAM: Multi-TF Convergence
+     SLIDE 5 — CONTENT_GRID: Best Imbalances
      ═══════════════════════════════════════ */
   {
     id: 5,
-    type: 'DIAGRAM',
-    variant: 'dark',
-    title: 'Multi-Timeframe Convergence',
-    content: (
-      <div className="max-w-4xl mx-auto space-y-8">
-        <p className="text-xl text-slate-300 text-center leading-relaxed">
-          When four timeframes point at the <Keyword>same price level</Keyword> — that is the highest conviction zone possible.
-        </p>
-        <div className="space-y-3">
-          <div className="p-4 rounded-xl border bg-emerald-500/[0.06] border-emerald-500/20 backdrop-blur-sm">
-            <div className="flex items-center justify-between">
-              <span className="text-xs font-black uppercase tracking-[0.15em] text-emerald-400">DAILY</span>
-              <span className="text-sm text-white/80 font-medium">Internal Low — Swing Point</span>
-            </div>
-          </div>
-          <div className="p-4 rounded-xl border bg-emerald-500/[0.09] border-emerald-500/25 backdrop-blur-sm ml-[6%]">
-            <div className="flex items-center justify-between">
-              <span className="text-xs font-black uppercase tracking-[0.15em] text-emerald-400">4-HOUR</span>
-              <span className="text-sm text-white/80 font-medium">External Swing Low</span>
-            </div>
-          </div>
-          <div className="p-4 rounded-xl border bg-emerald-500/[0.12] border-emerald-500/30 backdrop-blur-sm ml-[12%]">
-            <div className="flex items-center justify-between">
-              <span className="text-xs font-black uppercase tracking-[0.15em] text-emerald-400">1-HOUR</span>
-              <span className="text-sm text-white/80 font-medium">Swing Point Reaction Zone</span>
-            </div>
-          </div>
-          <div className="p-4 rounded-xl border bg-emerald-500/[0.16] border-emerald-500/40 backdrop-blur-sm ml-[18%]">
-            <div className="flex items-center justify-between">
-              <span className="text-xs font-black uppercase tracking-[0.15em] text-emerald-400">30-MIN</span>
-              <span className="text-sm text-white/80 font-medium">External Low + Liquidity Pool</span>
-            </div>
-          </div>
-        </div>
-        <div className="text-center pt-2">
-          <div className="inline-flex items-center gap-3 px-6 py-3 rounded-full bg-amber-500/10 border border-amber-500/30">
-            <span className="text-amber-400 text-lg">★</span>
-            <span className="text-base font-black text-amber-300 uppercase tracking-wider">High-Probability Reaction Zone</span>
-            <span className="text-amber-400 text-lg">★</span>
-          </div>
-        </div>
-        <RevealBox title="Why Convergence Matters" variant="gold">
-          <p className="text-white text-lg leading-relaxed">
-            You're not guessing. You're not hoping. You have <strong className="text-amber-400">four layers of evidence</strong> telling you where the market is going to react. This is where your A+ setups live.
-          </p>
-        </RevealBox>
-      </div>
-    ),
-  },
-
-  /* ═══════════════════════════════════════
-     SLIDE 6 — CONTENT_GRID: Best Imbalances
-     ═══════════════════════════════════════ */
-  {
-    id: 6,
     type: 'CONTENT_GRID',
     variant: 'dark',
     title: 'The Best Imbalances',
@@ -317,10 +219,10 @@ export const SLIDES: SlideData[] = [
   },
 
   /* ═══════════════════════════════════════
-     SLIDE 7 — STATEMENT: Price Is Fractal
+     SLIDE 6 — STATEMENT: Price Is Fractal
      ═══════════════════════════════════════ */
   {
-    id: 7,
+    id: 6,
     type: 'STATEMENT',
     variant: 'dark',
     title: 'Price Is',
@@ -329,10 +231,10 @@ export const SLIDES: SlideData[] = [
   },
 
   /* ═══════════════════════════════════════
-     SLIDE 8 — SPLIT: The Fractal Truth
+     SLIDE 7 — SPLIT: The Fractal Truth
      ═══════════════════════════════════════ */
   {
-    id: 8,
+    id: 7,
     type: 'SPLIT',
     variant: 'emerald',
     title: 'The Fractal Truth',
@@ -385,10 +287,10 @@ export const SLIDES: SlideData[] = [
   },
 
   /* ═══════════════════════════════════════
-     SLIDE 9 — CONTENT_GRID: Complete Sequence
+     SLIDE 8 — CONTENT_GRID: Complete Sequence
      ═══════════════════════════════════════ */
   {
-    id: 9,
+    id: 8,
     type: 'CONTENT_GRID',
     variant: 'dark',
     title: 'The Complete Sequence',
@@ -421,10 +323,10 @@ export const SLIDES: SlideData[] = [
   },
 
   /* ═══════════════════════════════════════
-     SLIDE 10 — SUMMARY
+     SLIDE 9 — SUMMARY
      ═══════════════════════════════════════ */
   {
-    id: 10,
+    id: 9,
     type: 'SUMMARY',
     variant: 'dark',
     title: 'The Complete HTF Framework',
