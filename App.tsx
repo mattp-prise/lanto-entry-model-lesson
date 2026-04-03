@@ -304,7 +304,7 @@ const App: React.FC = () => {
             variants={containerVariants}
             initial="hidden"
             animate="visible"
-            className="space-y-16 pt-32"
+            className="space-y-10"
           >
             <motion.h2
               variants={headerVariants}
