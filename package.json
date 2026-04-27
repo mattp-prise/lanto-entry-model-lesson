@@ -1,5 +1,5 @@
 {
-  "name": "entry-model-lesson",
+  "name": "lanto-slide-deck",
   "private": true,
   "version": "1.0.0",
   "type": "module",
@@ -9,6 +9,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@vercel/analytics": "^2.0.1",
     "framer-motion": "^12.34.0",
     "lucide-react": "^0.563.0",
     "react": "^19.2.4",

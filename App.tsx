@@ -10,6 +10,7 @@ import {
 import SlideWrapper from './components/SlideWrapper';
 import ChartDisplay from './components/ChartDisplay';
 import { SLIDES, SlideData } from './data/slides';
+import { Analytics } from "@vercel/analytics/react";
 
 /* ─── Animation Variants ─── */
 const containerVariants = {
@@ -465,6 +466,7 @@ const App: React.FC = () => {
           </motion.div>
         )}
       </AnimatePresence>
+      <Analytics />
     </div>
   );
 };
